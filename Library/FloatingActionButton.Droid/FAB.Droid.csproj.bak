@@ -3,19 +3,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FEB016FC-294D-46AF-BF9D-5C1CD0C45B1D}</ProjectGuid>
     <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProjectGuid>{49CE4944-F3EC-4241-9AC2-617F42624CFE}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>FABSample.Droid</RootNamespace>
-    <AssemblyName>FABSample.Droid</AssemblyName>
-    <TargetFrameworkVersion>v7.1</TargetFrameworkVersion>
-    <AndroidApplication>True</AndroidApplication>
-    <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
-    <AndroidResgenClass>Resource</AndroidResgenClass>
-    <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
-    <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
+    <RootNamespace>FAB.Droid</RootNamespace>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
-    <AndroidUseLatestPlatformSdk>true</AndroidUseLatestPlatformSdk>
+    <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
+    <AndroidResgenClass>Resource</AndroidResgenClass>
+    <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
+    <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
+    <AssemblyName>FAB.Droid</AssemblyName>
+    <TargetFrameworkVersion>v7.0</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -25,16 +23,18 @@
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <ConsolePause>false</ConsolePause>
     <AndroidLinkMode>None</AndroidLinkMode>
+    <ConsolePause>false</ConsolePause>
+    <DocumentationFile>bin\Debug\FAB.Droid.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <Optimize>true</Optimize>
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <ConsolePause>false</ConsolePause>
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
+    <ConsolePause>false</ConsolePause>
+    <DocumentationFile>bin\Release\FAB.Droid.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -82,58 +82,50 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
+    <Compile Include="FloatingActionButtonRenderer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils.cs" />
+    <Compile Include="LinkerPleaseInclude.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
-    <None Include="Properties\AndroidManifest.xml" />
-    <None Include="Assets\AboutAssets.txt" />
     <None Include="packages.config" />
   </ItemGroup>
+  <Import Project="..\FloatingActionButton.Shared\FloatingActionButton.Shared.projitems" Label="Shared" Condition="Exists('..\FloatingActionButton.Shared\FloatingActionButton.Shared.projitems')" />
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
+  <Import Project="..\packages\Xamarin.Forms.1.3.3.6323\build\portable-win+net45+wp80+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.1.3.3.6323\build\portable-win+net45+wp80+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
+  <Import Project="..\..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets" Condition="Exists('..\..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets')" />
   <ItemGroup>
-    <AndroidResource Include="Resources\values\strings.xml" />
-    <AndroidResource Include="Resources\drawable-hdpi\plus.png" />
-    <AndroidResource Include="Resources\drawable-mdpi\plus.png" />
-    <AndroidResource Include="Resources\drawable-xhdpi\plus.png" />
-    <AndroidResource Include="Resources\drawable-xxhdpi\plus.png" />
-    <AndroidResource Include="Resources\drawable-xxxhdpi\plus.png" />
-    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_launcher.png" />
-    <AndroidResource Include="Resources\drawable-xxhdpi\ic_launcher.png" />
-    <AndroidResource Include="Resources\drawable-mdpi\ic_launcher.png" />
-    <AndroidResource Include="Resources\drawable-hdpi\ic_launcher.png" />
-    <AndroidResource Include="Resources\values\style.xml" />
-    <AndroidResource Include="Resources\layout\tabs.axml" />
-    <AndroidResource Include="Resources\layout\toolbar.axml" />
-    <AndroidResource Include="Resources\drawable\csharp.png" />
-    <AndroidResource Include="Resources\drawable\xml.png" />
-    <AndroidResource Include="Resources\drawable\list.png" />
+    <Folder Include="Resources\" />
+    <Folder Include="Library\" />
+    <Folder Include="Properties\" />
+    <Folder Include="Resources\layout\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FABSample\FABSample.csproj">
-      <Project>{8A6D05F8-9D1F-4327-B7A5-4DD290270327}</Project>
-      <Name>FABSample</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Library\FloatingActionButton.Droid\FAB.Droid.csproj">
-      <Project>{49CE4944-F3EC-4241-9AC2-617F42624CFE}</Project>
-      <Name>FAB.Droid</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Library\FloatingActionButton.Forms\Profile78\FAB.Forms.Profile78.csproj">
+    <AndroidResource Include="Resources\drawable-hdpi\fab_shadow.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\fab_shadow_mini.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\fab_shadow.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\fab_shadow_mini.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\fab_shadow.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\fab_shadow_mini.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\fab_shadow.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\fab_shadow_mini.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\fab_shadow.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\fab_shadow_mini.png" />
+    <AndroidResource Include="Resources\values\strings.xml" />
+    <AndroidResource Include="Resources\values\attrs.xml" />
+    <AndroidResource Include="Resources\values\colors.xml" />
+    <AndroidResource Include="Resources\values\dimens.xml" />
+    <AndroidResource Include="Resources\values\info_strings.xml" />
+    <AndroidResource Include="Resources\layout\mini_fab.axml" />
+    <AndroidResource Include="Resources\layout\normal_fab.axml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FloatingActionButton.Forms\Profile78\FAB.Forms.Profile78.csproj">
       <Project>{78B00F76-5FB4-4429-ABF6-42A80A6E967E}</Project>
       <Name>FAB.Forms.Profile78</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\drawable-hdpi\" />
-    <Folder Include="Resources\drawable-mdpi\" />
-    <Folder Include="Resources\drawable-xhdpi\" />
-    <Folder Include="Resources\drawable-xxhdpi\" />
-    <Folder Include="Resources\drawable-xxxhdpi\" />
-    <Folder Include="Resources\layout\" />
-    <Folder Include="Resources\drawable\" />
-  </ItemGroup>
-  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
-  <Import Project="..\..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets" Condition="Exists('..\..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets')" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.2.127\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.2.127\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
 </Project>

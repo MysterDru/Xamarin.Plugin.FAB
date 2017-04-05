@@ -148,7 +148,7 @@ namespace FAB.iOS
                 {
                     if(image != null)
                     {
-                        UIGraphics.BeginImageContext(new CoreGraphics.CGSize(widthRequest, heightRequest));
+                        UIGraphics.BeginImageContextWithOptions(new CoreGraphics.CGSize(widthRequest, heightRequest), false, UIScreen.MainScreen.Scale);
                         image.Draw(new CoreGraphics.CGRect(0, 0, widthRequest, heightRequest));
                         using (var resultImage = UIGraphics.GetImageFromCurrentImageContext())
                         {

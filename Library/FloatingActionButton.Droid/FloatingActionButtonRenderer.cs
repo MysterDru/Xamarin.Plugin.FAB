@@ -9,6 +9,7 @@ using FAB.Forms;
 using Android.Views;
 using Widget = Android.Support.Design.Widget;
 using Android.Content.Res;
+using Android.OS;
 using Android.Support.V4.View;
 
 [assembly: ExportRenderer(typeof(FAB.Forms.FloatingActionButton), typeof(FAB.Droid.FloatingActionButtonRenderer))]
@@ -47,10 +48,20 @@ namespace FAB.Droid
                 this.UpdateControlForSize();
             }
             else if (e.PropertyName == FloatingActionButton.NormalColorProperty.PropertyName ||
-                     e.PropertyName == FloatingActionButton.PressedColorProperty.PropertyName ||
                      e.PropertyName == FloatingActionButton.DisabledColorProperty.PropertyName)
             {
-                this.SetBackgroundColors();
+                this.SetBackgroundColor();
+            }
+            else if (e.PropertyName == FloatingActionButton.PressedColorProperty.PropertyName)
+            {
+                try
+                {
+                    this.SetRippleColor();
+                }
+                catch (MissingMethodException)
+                {
+                    // ignored
+                }
             }
             else if (e.PropertyName == FloatingActionButton.HasShadowProperty.PropertyName)
             {
@@ -101,7 +112,16 @@ namespace FAB.Droid
 
         private void UpdateStyle()
         {
-            this.SetBackgroundColors();
+            this.SetBackgroundColor();
+
+            try
+            {
+                this.SetRippleColor();
+            }
+            catch (MissingMethodException)
+            {
+                // ignored
+            }
 
             this.SetHasShadow();
 
@@ -110,10 +130,15 @@ namespace FAB.Droid
             this.UpdateEnabled();
         }
 
-        private void SetBackgroundColors()
+        private void SetBackgroundColor()
         {
-            this.Control.BackgroundTintList = ColorStateList.ValueOf(this.Element.NormalColor.ToAndroid());
-            this.Control.SetRippleColor(this.Element.RippleColor.ToAndroid());
+            Control.BackgroundTintList = ColorStateList.ValueOf(Element.NormalColor.ToAndroid());
+        }
+
+        private void SetRippleColor()
+        {
+            var rippleColor = Element.RippleColor.ToAndroid();
+            Control.RippleColor = rippleColor;
         }
 
         private void SetHasShadow()
