@@ -115,7 +115,7 @@ namespace FAB.Droid
             this.Control.BackgroundTintList = ColorStateList.ValueOf(this.Element.NormalColor.ToAndroid());
             try
             {
-                this.Control.SetRippleColor(this.Element.RippleColor.ToAndroid());
+                this.Control.RippleColor = this.Element.RippleColor.ToAndroid();
             }
             catch (MissingMethodException)
             {
